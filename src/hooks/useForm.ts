@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { ITuInterface } from "../Interfaces/ITuInterfaz";
 
 
-export const useForm = (initialForm = {}) => {
+export const useForm = (initialForm: ITuInterface = {}) => {
     
     const [formState, setFormState] = useState( initialForm );
 
@@ -12,20 +13,26 @@ export const useForm = (initialForm = {}) => {
         const { name, value } = target;
 
         setFormState({
+            //desestructuro el formState para mantener todos los valores del formulario
             ...formState,
+            
             [name]: value
         });
 
     }
 
+    const onResetForm = () => {
+
+        setFormState ( initialForm);
+    }
 
     return {
         // desestructuramos el formState para poder enviar todas las propiedades
         ...formState,
-        
+
         formState,
         onInputChange,
-
+        onResetForm
   }
   
 }
